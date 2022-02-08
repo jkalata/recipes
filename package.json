@@ -20,11 +20,14 @@
     "@angular/platform-browser": "~13.2.0",
     "@angular/platform-browser-dynamic": "~13.2.0",
     "@angular/router": "~13.2.0",
+    "@ngneat/error-tailor": "^2.1.0",
+    "@ngneat/reactive-forms": "^4.0.4",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
+    "@ngneat/spectator": "^10.0.0",
     "@angular-devkit/build-angular": "~13.2.2",
     "@angular/cli": "~13.2.2",
     "@angular/compiler-cli": "~13.2.0",
@@ -33,6 +36,7 @@
     "jasmine-core": "~4.0.0",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",
+    "karma-firerox-launcher": "~3.1.0",
     "karma-coverage": "~2.1.0",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",

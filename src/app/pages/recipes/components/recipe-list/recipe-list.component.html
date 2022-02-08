@@ -1,0 +1,13 @@
+<div class="container">
+  <app-add-recipe-button></app-add-recipe-button>
+  <ng-container *ngIf="recipes.length > 0; else noRecipes">
+    <app-recipe
+      [recipe]="recipe"
+      *ngFor="let recipe of recipes; trackBy: identity"
+    >
+    </app-recipe>
+  </ng-container>
+  <ng-template #noRecipes>
+    <h2>No recipes</h2>
+  </ng-template>
+</div>

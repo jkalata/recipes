@@ -1,0 +1,17 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ recipe.name }}</mat-card-title>
+    <mat-card-subtitle>
+      <div>
+        {{ recipe.description }}
+      </div>
+      <div class="preparation-time">
+        <mat-icon>access_time</mat-icon>
+        {{ preparationTime }}
+      </div>
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <app-ingredients [ingredients]="recipe.ingredients"></app-ingredients>
+  </mat-card-content>
+</mat-card>

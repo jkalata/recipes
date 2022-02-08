@@ -1,20 +1,32 @@
+import { HeaderModule } from './core/header/header.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ErrorTailorModule } from '@ngneat/error-tailor';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HeaderModule,
+    HttpClientModule,
+    ErrorTailorModule.forRoot({
+      errors: {
+        useValue: {
+          required: 'This field is required',
+          minlength: ({ requiredLength, actualLength }) =>
+            `Expect ${requiredLength} but got ${actualLength}`,
+        },
+      },
+    }),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

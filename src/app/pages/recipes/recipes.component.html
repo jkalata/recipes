@@ -1,0 +1,3 @@
+<ng-container *ngIf="recipes$ | async as recipes">
+  <app-recipe-list [recipes]="recipes"></app-recipe-list>
+</ng-container>

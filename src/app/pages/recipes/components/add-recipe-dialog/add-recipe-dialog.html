@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Add recipe</h1>
+<div mat-dialog-content>
+  <app-recipe-form [formGroup]="form"></app-recipe-form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="cancel()">Cancel</button>
+  <button mat-button (click)="add()" cdkFocusInitial>Add</button>
+</div>

@@ -1,0 +1,7 @@
+<h3>Ingredients:</h3>
+<div
+  class="ingredient-list"
+  *ngFor="let ingredient of ingredients; trackBy: identity"
+>
+  {{ ingredient.name }} - {{ ingredient.quantity }}
+</div>
