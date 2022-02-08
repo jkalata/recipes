@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.ingredients-container {
+  display: flex;
+  flex-direction: column;
+
+  mat-form-field:first-child {
+    margin-right: 1em;
+  }
+}

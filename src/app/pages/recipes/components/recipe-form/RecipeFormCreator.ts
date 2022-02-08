@@ -2,6 +2,7 @@ import {
   IRecipe,
   INewRecipe,
   INewIngredient,
+  IIngredient,
 } from './../../interfaces/recipes.interfaces';
 import {
   ControlsOf,
@@ -21,9 +22,10 @@ export class RecipeFormCreator {
     }
   }
 
-  init(): FormGroup<ControlsOf<INewRecipe>> {
-    const ingredients: FormArray<INewIngredient> = this.getIngredientsArray();
+  init(): FormGroup<ControlsOf<IRecipe>> {
+    const ingredients: FormArray<IIngredient> = this.getIngredientsArray();
     return this.fb.group({
+      _id: [this.recipe?._id ?? ''],
       description: [this.recipe?.description ?? '', Validators.required],
       ingredients: this.getIngredientsArray(),
       name: [this.recipe?.name ?? '', Validators.required],
@@ -34,7 +36,7 @@ export class RecipeFormCreator {
     });
   }
 
-  private getIngredientsArray(): FormArray<INewIngredient> {
+  private getIngredientsArray(): FormArray<IIngredient> {
     if (this.recipe) {
     }
     return this.recipe
@@ -42,10 +44,11 @@ export class RecipeFormCreator {
       : this.getNewIngredients();
   }
 
-  private getExistingIngredients(recipe: IRecipe): FormArray<INewIngredient> {
+  private getExistingIngredients(recipe: IRecipe): FormArray<IIngredient> {
     return this.fb.array(
       recipe.ingredients.map((ingredient) =>
         this.fb.group({
+          _id: [ingredient._id],
           name: [ingredient.name, Validators.required],
           quantity: [ingredient.quantity, Validators.required],
         })
@@ -53,9 +56,10 @@ export class RecipeFormCreator {
     );
   }
 
-  private getNewIngredients(): FormArray<INewIngredient> {
+  private getNewIngredients(): FormArray<IIngredient> {
     return this.fb.array([
       this.fb.group({
+        _id: [''],
         name: ['', Validators.required],
         quantity: ['', Validators.required],
       }),

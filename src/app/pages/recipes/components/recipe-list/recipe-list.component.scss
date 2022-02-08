@@ -2,7 +2,7 @@
   padding: 1em;
 }
 
-app-recipe {
+app-recipe:not(:first-child) {
   display: block;
   margin-top: 1em;
 }

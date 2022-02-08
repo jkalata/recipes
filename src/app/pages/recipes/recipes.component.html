@@ -1,3 +1,8 @@
-<ng-container *ngIf="recipes$ | async as recipes">
-  <app-recipe-list [recipes]="recipes"></app-recipe-list>
+<ng-container *ngIf="recipes$">
+  <app-add-recipe-button (addEvent)="addRecipe($event)"></app-add-recipe-button>
+  <app-recipe-list
+    (deleteEvent)="deleteRecipe($event)"
+    (editEvent)="editRecipe($event)"
+    [recipes$]="recipes$"
+  ></app-recipe-list>
 </ng-container>

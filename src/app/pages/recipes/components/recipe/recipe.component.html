@@ -10,6 +10,15 @@
         {{ preparationTime }}
       </div>
     </mat-card-subtitle>
+    <div>
+      <app-delete-recipe-button
+        (delete)="emitDeleteEvent()"
+      ></app-delete-recipe-button>
+      <app-edit-recipe-button
+        [recipe]="recipe"
+        (editEvent)="emitEditEvent($event)"
+      ></app-edit-recipe-button>
+    </div>
   </mat-card-header>
   <mat-card-content>
     <app-ingredients [ingredients]="recipe.ingredients"></app-ingredients>

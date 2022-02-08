@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>{{data.title}}</h1>
+<div mat-dialog-content>
+  <app-recipe-form [formGroup]="form"></app-recipe-form>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="cancel()">Cancel</button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="add()"
+    cdkFocusInitial
+    [disabled]="form.invalid"
+  >
+    {{data.okButtonLabel}}
+  </button>
+</div>

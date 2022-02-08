@@ -1,4 +1,4 @@
-<ng-container [formGroup]="form" *ngIf="form">
+<div class="container" [formGroup]="form" *ngIf="form" errorTailor>
   <mat-form-field appearance="fill">
     <mat-label>Name</mat-label>
     <input matInput formControlName="name" />
@@ -15,15 +15,17 @@
   </mat-form-field>
 
   <div>Ingredients</div>
-  <ng-container *ngFor="let formGroup of form.get('ingredients').controls">
-    <mat-form-field appearance="fill" [formGroup]="formGroup">
-      <mat-label>Name</mat-label>
-      <input matInput formControlName="name" />
-    </mat-form-field>
+  <div class="ingredients-container">
+    <div *ngFor="let formGroup of form.get('ingredients').controls">
+      <mat-form-field appearance="fill" [formGroup]="formGroup">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" />
+      </mat-form-field>
 
-    <mat-form-field appearance="fill" [formGroup]="formGroup">
-      <mat-label>Quantity</mat-label>
-      <input matInput formControlName="quantity" />
-    </mat-form-field>
-  </ng-container>
-</ng-container>
+      <mat-form-field appearance="fill" [formGroup]="formGroup">
+        <mat-label>Quantity</mat-label>
+        <input matInput formControlName="quantity" />
+      </mat-form-field>
+    </div>
+  </div>
+</div>

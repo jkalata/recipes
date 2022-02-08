@@ -1,3 +1,5 @@
+import { ErrorTailorModule } from '@ngneat/error-tailor';
+import { ConfirmDialogModule } from './../../shared/confirm-dialog/confirm-dialog.module';
 import { MatButtonModule } from '@angular/material/button';
 import { MockRecipesService } from './services/mock-recipes.service';
 import { RecipesService } from './services/recipes.service';
@@ -13,12 +15,14 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { RecipeComponent } from './components/recipe/recipe.component';
 import { IngredientsComponent } from './components/recipe/ingredients/ingredients.component';
 import { AddRecipeButtonComponent } from './components/add-recipe-button/add-recipe-button.component';
-import { AddRecipeDialog } from './components/add-recipe-dialog/add-recipe-dialog';
+import { RecipeDialog } from './components/recipe-dialog/recipe-dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { RecipeFormComponent } from './components/recipe-form/recipe-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DeleteRecipeButtonComponent } from './components/delete-recipe-button/delete-recipe-button.component';
+import { EditRecipeButtonComponent } from './components/edit-recipe-button/edit-recipe-button.component';
 
 @NgModule({
   declarations: [
@@ -27,12 +31,15 @@ import { ReactiveFormsModule } from '@angular/forms';
     RecipeComponent,
     IngredientsComponent,
     AddRecipeButtonComponent,
-    AddRecipeDialog,
+    RecipeDialog,
     RecipeFormComponent,
+    DeleteRecipeButtonComponent,
+    EditRecipeButtonComponent,
   ],
   imports: [
     CommonModule,
     RecipesRoutingModule,
+    ConfirmDialogModule,
     MatCardModule,
     MatIconModule,
     MatDividerModule,
@@ -42,6 +49,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatFormFieldModule,
     ReactiveFormsModule,
     MatInputModule,
+    ErrorTailorModule,
   ],
   providers: [{ provide: RecipesService, useClass: MockRecipesService }],
 })

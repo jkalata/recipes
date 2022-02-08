@@ -1,8 +1,9 @@
-<div class="container">
-  <app-add-recipe-button></app-add-recipe-button>
+<div class="container" *ngIf="recipes$ | async as recipes">
   <ng-container *ngIf="recipes.length > 0; else noRecipes">
     <app-recipe
       [recipe]="recipe"
+      (deleteEvent)="emitDeleteEvent($event)"
+      (editEvent)="emitEditEvent($event)"
       *ngFor="let recipe of recipes; trackBy: identity"
     >
     </app-recipe>

@@ -3,6 +3,16 @@
   align-items: center;
 }
 
+mat-card-header {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+
+  app-delete-recipe-button {
+    margin-right: 1em;
+  }
+}
+
 mat-card-content {
   padding-left: 2em;
 }
