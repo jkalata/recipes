@@ -1,12 +1,9 @@
+import { IRecipe } from './../../interfaces/recipes.interfaces';
+import { RecipeEventService } from './../../services/recipe-event.service';
 import { take } from 'rxjs';
-import { ConfirmDialog } from './../../../../shared/confirm-dialog/confirm-dialog';
+import { ConfirmDialogComponent } from '../../../../shared/confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import {
-  Component,
-  ChangeDetectionStrategy,
-  Output,
-  EventEmitter,
-} from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
   selector: 'app-delete-recipe-button',
@@ -15,21 +12,25 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DeleteRecipeButtonComponent {
-  @Output() delete = new EventEmitter<void>();
-  constructor(private dialog: MatDialog) {}
+  @Input() recipe!: IRecipe;
+
+  constructor(
+    private dialog: MatDialog,
+    private recipeEventService: RecipeEventService
+  ) {}
 
   openConfirmDialog() {
     this.dialog
-      .open(ConfirmDialog, {
+      .open(ConfirmDialogComponent, {
         data: {
-          message: 'Are you sure you want to delete this recipe?',
+          message: `Are you sure you want to delete this recipe: ${this.recipe.name}`,
         },
       })
       .afterClosed()
       .pipe(take(1))
-      .subscribe((result) => {
+      .subscribe((result: boolean) => {
         if (result) {
-          this.delete.emit();
+          this.recipeEventService.emitDeleteEvent(this.recipe._id);
         }
       });
   }

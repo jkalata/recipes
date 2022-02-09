@@ -1,25 +1,32 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { MOCK_RECIPE_LIST } from './../../../mocks/recipes.mocks';
 import { IngredientsComponent } from './ingredients.component';
+import { Spectator, createComponentFactory, byTestId } from '@ngneat/spectator';
 
 describe('IngredientsComponent', () => {
   let component: IngredientsComponent;
-  let fixture: ComponentFixture<IngredientsComponent>;
+  let spectator: Spectator<IngredientsComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ IngredientsComponent ]
-    })
-    .compileComponents();
+  const mockRecipe = MOCK_RECIPE_LIST[0];
+  const createComponent = createComponentFactory({
+    component: IngredientsComponent,
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(IngredientsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    spectator = createComponent({
+      props: {
+        ingredients: mockRecipe.ingredients,
+      },
+    });
+    component = spectator.component;
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('renders all ingredients', () => {
+    expect(spectator.queryAll(byTestId('ingredient'))).toHaveLength(
+      component.ingredients.length
+    );
   });
 });

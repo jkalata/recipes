@@ -31,7 +31,7 @@ export class RecipeFormCreator {
       name: [this.recipe?.name ?? '', Validators.required],
       preparationTimeInMinutes: [
         this.recipe?.preparationTimeInMinutes ?? 0,
-        Validators.required,
+        [Validators.required, Validators.min(1)],
       ],
     });
   }

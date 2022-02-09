@@ -1,22 +1,21 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { RecipeEventService } from './../../services/recipe-event.service';
+import { MatDialogModule } from '@angular/material/dialog';
 import { DeleteRecipeButtonComponent } from './delete-recipe-button.component';
+import { Spectator, createComponentFactory } from '@ngneat/spectator';
 
 describe('DeleteRecipeButtonComponent', () => {
   let component: DeleteRecipeButtonComponent;
-  let fixture: ComponentFixture<DeleteRecipeButtonComponent>;
+  let spectator: Spectator<DeleteRecipeButtonComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ DeleteRecipeButtonComponent ]
-    })
-    .compileComponents();
+  const createComponent = createComponentFactory({
+    component: DeleteRecipeButtonComponent,
+    imports: [MatDialogModule],
+    providers: [RecipeEventService],
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DeleteRecipeButtonComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    spectator = createComponent();
+    component = spectator.component;
   });
 
   it('should create', () => {

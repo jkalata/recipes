@@ -11,12 +11,25 @@
 
   <mat-form-field appearance="fill">
     <mat-label>Preparation time (minutes)</mat-label>
-    <input matInput formControlName="preparationTimeInMinutes" />
+    <input
+      type="number"
+      min="1"
+      matInput
+      formControlName="preparationTimeInMinutes"
+    />
   </mat-form-field>
 
-  <div>Ingredients</div>
+  <h2>
+    <span>Ingredients</span>
+    <app-add-ingredient-button
+      (add)="addIngredient()"
+    ></app-add-ingredient-button>
+  </h2>
   <div class="ingredients-container">
-    <div *ngFor="let formGroup of form.get('ingredients').controls">
+    <div
+      class="ingredient-row"
+      *ngFor="let formGroup of form.get('ingredients').controls; let i = index"
+    >
       <mat-form-field appearance="fill" [formGroup]="formGroup">
         <mat-label>Name</mat-label>
         <input matInput formControlName="name" />
@@ -26,6 +39,10 @@
         <mat-label>Quantity</mat-label>
         <input matInput formControlName="quantity" />
       </mat-form-field>
+
+      <app-remove-ingredient-button
+        (remove)="removeIngredient(i)"
+      ></app-remove-ingredient-button>
     </div>
   </div>
 </div>

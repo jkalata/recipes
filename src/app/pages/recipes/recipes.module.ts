@@ -15,7 +15,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { RecipeComponent } from './components/recipe/recipe.component';
 import { IngredientsComponent } from './components/recipe/ingredients/ingredients.component';
 import { AddRecipeButtonComponent } from './components/add-recipe-button/add-recipe-button.component';
-import { RecipeDialog } from './components/recipe-dialog/recipe-dialog';
+import { RecipeDialogComponent } from './components/recipe-dialog/recipe-dialog.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -23,6 +23,9 @@ import { RecipeFormComponent } from './components/recipe-form/recipe-form.compon
 import { ReactiveFormsModule } from '@angular/forms';
 import { DeleteRecipeButtonComponent } from './components/delete-recipe-button/delete-recipe-button.component';
 import { EditRecipeButtonComponent } from './components/edit-recipe-button/edit-recipe-button.component';
+import { RecipeEventService } from './services/recipe-event.service';
+import { AddIngredientButtonComponent } from './components/recipe-form/add-ingredient-button/add-ingredient-button.component';
+import { RemoveIngredientButtonComponent } from './components/recipe-form/remove-ingredient-button/remove-ingredient-button.component';
 
 @NgModule({
   declarations: [
@@ -31,10 +34,12 @@ import { EditRecipeButtonComponent } from './components/edit-recipe-button/edit-
     RecipeComponent,
     IngredientsComponent,
     AddRecipeButtonComponent,
-    RecipeDialog,
+    RecipeDialogComponent,
     RecipeFormComponent,
     DeleteRecipeButtonComponent,
     EditRecipeButtonComponent,
+    AddIngredientButtonComponent,
+    RemoveIngredientButtonComponent,
   ],
   imports: [
     CommonModule,
@@ -51,6 +56,9 @@ import { EditRecipeButtonComponent } from './components/edit-recipe-button/edit-
     MatInputModule,
     ErrorTailorModule,
   ],
-  providers: [{ provide: RecipesService, useClass: MockRecipesService }],
+  providers: [
+    { provide: RecipesService, useClass: MockRecipesService },
+    RecipeEventService,
+  ],
 })
 export class RecipesModule {}

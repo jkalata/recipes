@@ -1,5 +1,5 @@
-import { IRecipeDialogData } from '../recipe-dialog/recipe-dialog';
-import { RecipeDialog } from '../recipe-dialog/recipe-dialog';
+import { IRecipeDialogData } from '../recipe-dialog/recipe-dialog.component';
+import { RecipeDialogComponent } from '../recipe-dialog/recipe-dialog.component';
 import { INewRecipe } from './../../interfaces/recipes.interfaces';
 import {
   Component,
@@ -26,8 +26,10 @@ export class AddRecipeButtonComponent {
       title: 'Add recipe',
     };
     this.dialog
-      .open(RecipeDialog, {
+      .open(RecipeDialogComponent, {
         data: dialogData,
+        width: '90%',
+        maxWidth: '500px',
       })
       .afterClosed()
       .pipe(take(1))

@@ -1,11 +1,5 @@
 import { IRecipe } from './../../interfaces/recipes.interfaces';
-import {
-  Component,
-  ChangeDetectionStrategy,
-  Input,
-  Output,
-  EventEmitter,
-} from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
   selector: 'app-recipe',
@@ -15,8 +9,6 @@ import {
 })
 export class RecipeComponent {
   @Input() recipe!: IRecipe;
-  @Output() deleteEvent: EventEmitter<string> = new EventEmitter();
-  @Output() editEvent: EventEmitter<IRecipe> = new EventEmitter();
 
   get preparationTime(): string {
     return this.recipe.preparationTimeInMinutes < 60
@@ -28,13 +20,5 @@ export class RecipeComponent {
     return `${(this.recipe.preparationTimeInMinutes / 60).toPrecision(
       2
     )} hours`;
-  }
-
-  emitDeleteEvent(): void {
-    this.deleteEvent.emit(this.recipe._id);
-  }
-
-  emitEditEvent(recipe: IRecipe): void {
-    this.editEvent.emit(recipe);
   }
 }

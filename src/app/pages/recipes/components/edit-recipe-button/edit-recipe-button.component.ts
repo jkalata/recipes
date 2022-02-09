@@ -1,17 +1,12 @@
+import { RecipeEventService } from './../../services/recipe-event.service';
 import { take } from 'rxjs';
-import { IRecipe, INewRecipe } from './../../interfaces/recipes.interfaces';
+import { IRecipe } from './../../interfaces/recipes.interfaces';
 import {
   IRecipeDialogData,
-  RecipeDialog,
-} from '../recipe-dialog/recipe-dialog';
+  RecipeDialogComponent,
+} from '../recipe-dialog/recipe-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import {
-  Component,
-  ChangeDetectionStrategy,
-  Input,
-  Output,
-  EventEmitter,
-} from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
   selector: 'app-edit-recipe-button',
@@ -21,8 +16,11 @@ import {
 })
 export class EditRecipeButtonComponent {
   @Input() recipe!: IRecipe;
-  @Output() editEvent: EventEmitter<IRecipe> = new EventEmitter();
-  constructor(private dialog: MatDialog) {}
+
+  constructor(
+    private dialog: MatDialog,
+    private recipeEventService: RecipeEventService
+  ) {}
 
   openEditRecipeDialog() {
     const dialogData: IRecipeDialogData = {
@@ -32,14 +30,14 @@ export class EditRecipeButtonComponent {
     };
 
     this.dialog
-      .open(RecipeDialog, {
+      .open(RecipeDialogComponent, {
         data: dialogData,
       })
       .afterClosed()
       .pipe(take(1))
       .subscribe((recipe: IRecipe) => {
         if (recipe) {
-          this.editEvent.emit(recipe);
+          this.recipeEventService.emitEditEvent(recipe);
         }
       });
   }

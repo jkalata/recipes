@@ -3,11 +3,26 @@
   flex-direction: column;
 }
 
+h2 {
+  display: flex;
+  align-items: center;
+
+  span {
+    margin-right: 1em;
+  }
+}
+
 .ingredients-container {
   display: flex;
   flex-direction: column;
 
-  mat-form-field:first-child {
-    margin-right: 1em;
+  .ingredient-row {
+    display: flex;
+    mat-form-field:first-child {
+      margin-right: 1em;
+    }
+    mat-form-field {
+      flex: 1;
+    }
   }
 }

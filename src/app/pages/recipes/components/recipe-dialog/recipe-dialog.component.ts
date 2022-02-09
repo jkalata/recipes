@@ -7,16 +7,16 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-recipe-dialog',
-  templateUrl: './recipe-dialog.html',
-  styleUrls: ['./recipe-dialog.scss'],
+  templateUrl: './recipe-dialog.component.html',
+  styleUrls: ['./recipe-dialog.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RecipeDialog {
+export class RecipeDialogComponent {
   form: FormGroup<ControlsOf<INewRecipe>>;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: IRecipeDialogData,
-    private dialogRef: MatDialogRef<RecipeDialog>
+    private dialogRef: MatDialogRef<RecipeDialogComponent>
   ) {
     this.form = new RecipeFormCreator(data.recipe).init();
   }

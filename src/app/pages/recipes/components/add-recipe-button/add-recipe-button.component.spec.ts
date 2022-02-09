@@ -1,25 +1,37 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { AddRecipeButtonComponent } from './add-recipe-button.component';
+import {
+  Spectator,
+  createComponentFactory,
+  mockProvider,
+} from '@ngneat/spectator';
 
-describe('AddRecipeButtonComponent', () => {
+fdescribe('AddRecipeButtonComponent', () => {
   let component: AddRecipeButtonComponent;
-  let fixture: ComponentFixture<AddRecipeButtonComponent>;
+  let spectator: Spectator<AddRecipeButtonComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ AddRecipeButtonComponent ]
-    })
-    .compileComponents();
+  const createComponent = createComponentFactory({
+    component: AddRecipeButtonComponent,
+    imports: [MatDialogModule],
+    providers: [
+      { provide: MatDialogRef, useValue: mockProvider(MatDialogRef) },
+    ],
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddRecipeButtonComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    spectator = createComponent();
+    component = spectator.component;
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('', () => {
+    spyOn(component.dialog, 'open')
+     .and
+     .returnValue({afterClosed: () => of(MOCK_RECIPE_LIST[0])});
+    component.openAddRecipeDialog();
+    spectator.inject(MatDialogRef).close.
   });
 });
