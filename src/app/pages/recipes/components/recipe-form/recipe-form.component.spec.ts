@@ -35,11 +35,11 @@ describe('RecipeFormComponent', () => {
   });
 
   it('renders add ingredient button', () => {
-    expect(AddIngredientButtonComponent).toBeTruthy();
+    expect(spectator.query(AddIngredientButtonComponent)).toBeTruthy();
   });
 
   it('renders remove ingredient button', () => {
-    expect(RemoveIngredientButtonComponent).toBeTruthy();
+    expect(spectator.query(RemoveIngredientButtonComponent)).toBeTruthy();
   });
 
   it('adds ingredient on button click', () => {

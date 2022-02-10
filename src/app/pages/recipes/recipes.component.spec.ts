@@ -1,3 +1,4 @@
+import { SearchComponent } from './components/search/search.component';
 import { of, take } from 'rxjs';
 import { MOCK_RECIPE_LIST } from './mocks/recipes.mocks';
 import { RecipeEventService } from './services/recipe-event.service';
@@ -25,7 +26,11 @@ describe('RecipesComponent', () => {
     component: RecipesComponent,
     imports: [MatSnackBarModule],
     declarations: [
-      MockComponents(AddRecipeButtonComponent, RecipeListComponent),
+      MockComponents(
+        AddRecipeButtonComponent,
+        RecipeListComponent,
+        SearchComponent
+      ),
     ],
     providers: [
       { provide: RecipesService, useValue: mockRecipeService },
@@ -51,6 +56,10 @@ describe('RecipesComponent', () => {
 
   it('renders add recipe button', () => {
     expect(spectator.query(AddRecipeButtonComponent)).toBeTruthy();
+  });
+
+  it('renders search bar', () => {
+    expect(spectator.query(SearchComponent)).toBeTruthy();
   });
 
   it('renders recipe list', () => {

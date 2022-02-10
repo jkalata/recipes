@@ -1,3 +1,4 @@
+import { SearchEventService } from './../../services/search-event.service';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { MOCK_RECIPE_LIST } from './../../mocks/recipes.mocks';
 import { of } from 'rxjs';
@@ -14,6 +15,7 @@ describe('RecipeListComponent', () => {
     component: RecipeListComponent,
     imports: [CdkAccordionModule],
     declarations: [MockComponent(RecipeComponent)],
+    providers: [SearchEventService],
   });
 
   describe('no recipes', () => {

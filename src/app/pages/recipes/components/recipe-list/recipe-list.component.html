@@ -1,4 +1,4 @@
-<div class="container" *ngIf="recipes$ | async as recipes">
+<div class="container" *ngIf="filteredRecipes$ | async as recipes">
   <ng-container *ngIf="recipes.length > 0; else noRecipes">
     <cdk-accordion>
       <app-recipe
