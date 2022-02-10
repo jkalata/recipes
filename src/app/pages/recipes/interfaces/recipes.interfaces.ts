@@ -14,11 +14,7 @@ export interface IIngredient {
   quantity: string;
 }
 
-export type INewRecipe = Omit<IRecipe, '_id'> & {
-  ingredients: INewIngredient[];
-};
-
-export type INewIngredient = Omit<IIngredient, '_id'>;
+export type INewRecipe = Omit<IRecipe, '_id'>;
 
 export interface IRecipeService {
   getList(): Observable<IRecipe[]>;

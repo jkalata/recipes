@@ -1,4 +1,7 @@
-import { IIngredient } from './../../../interfaces/recipes.interfaces';
+import {
+  IIngredient,
+  INewIngredient,
+} from './../../../interfaces/recipes.interfaces';
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
@@ -8,7 +11,7 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IngredientsComponent {
-  @Input() ingredients: IIngredient[] = [];
+  @Input() ingredients: INewIngredient[] = [];
 
-  identity = (index: number, item: IIngredient): string => item._id;
+  identity = (index: number, item: INewIngredient): string => item.name;
 }

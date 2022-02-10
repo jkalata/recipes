@@ -1,6 +1,6 @@
 import { IRecipeDialogData } from '../recipe-dialog/recipe-dialog.component';
 import { RecipeDialogComponent } from '../recipe-dialog/recipe-dialog.component';
-import { INewRecipe } from './../../interfaces/recipes.interfaces';
+import { INewRecipe, IRecipe } from './../../interfaces/recipes.interfaces';
 import {
   Component,
   ChangeDetectionStrategy,
@@ -33,7 +33,7 @@ export class AddRecipeButtonComponent {
       })
       .afterClosed()
       .pipe(take(1))
-      .subscribe((newRecipe: INewRecipe) => {
+      .subscribe((newRecipe: IRecipe) => {
         if (newRecipe) {
           this.addEvent.emit(newRecipe);
         }

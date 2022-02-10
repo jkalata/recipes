@@ -1,13 +1,5 @@
-import {
-  INewRecipe,
-  INewIngredient,
-} from './../../interfaces/recipes.interfaces';
-import {
-  FormGroup,
-  ControlsOf,
-  FormControl,
-  FormBuilder,
-} from '@ngneat/reactive-forms';
+import { IIngredient, INewRecipe } from './../../interfaces/recipes.interfaces';
+import { FormGroup, ControlsOf, FormBuilder } from '@ngneat/reactive-forms';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ControlContainer, Validators } from '@angular/forms';
 
@@ -35,9 +27,7 @@ export class RecipeFormComponent implements OnInit {
     this.form.get('ingredients').push(this.createNewIngredientFormGroup());
   }
 
-  private createNewIngredientFormGroup(): FormGroup<
-    ControlsOf<INewIngredient>
-  > {
+  private createNewIngredientFormGroup(): FormGroup<ControlsOf<IIngredient>> {
     return this.fb.group({
       name: ['', Validators.required],
       quantity: ['', Validators.required],

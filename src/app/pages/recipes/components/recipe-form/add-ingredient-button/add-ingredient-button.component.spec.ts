@@ -1,25 +1,33 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { AddIngredientButtonComponent } from './add-ingredient-button.component';
+import {
+  Spectator,
+  createComponentFactory,
+  byRole,
+  byText,
+} from '@ngneat/spectator';
 
 describe('AddIngredientButtonComponent', () => {
   let component: AddIngredientButtonComponent;
-  let fixture: ComponentFixture<AddIngredientButtonComponent>;
+  let spectator: Spectator<AddIngredientButtonComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ AddIngredientButtonComponent ]
-    })
-    .compileComponents();
+  const createComponent = createComponentFactory({
+    component: AddIngredientButtonComponent,
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddIngredientButtonComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    spectator = createComponent();
+    component = spectator.component;
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('emits event on button click', () => {
+    const eventSpy = spyOn(component.add, 'emit');
+
+    spectator.click(byText('add'));
+
+    expect(eventSpy).toHaveBeenCalled();
   });
 });

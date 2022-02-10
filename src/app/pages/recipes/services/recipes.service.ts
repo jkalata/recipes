@@ -31,6 +31,12 @@ export class RecipesService implements IRecipeService {
   }
 
   update(body: IRecipe): Observable<{}> {
-    return this.http.put(`${this.url}/${body._id}`, body);
+    const recipe: INewRecipe = {
+      description: body.description,
+      ingredients: body.ingredients,
+      name: body.name,
+      preparationTimeInMinutes: body.preparationTimeInMinutes,
+    };
+    return this.http.put(`${this.url}/${body._id}`, recipe);
   }
 }

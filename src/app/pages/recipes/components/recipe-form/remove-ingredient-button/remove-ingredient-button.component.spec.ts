@@ -1,25 +1,28 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { RemoveIngredientButtonComponent } from './remove-ingredient-button.component';
+import { Spectator, createComponentFactory, byText } from '@ngneat/spectator';
 
 describe('RemoveIngredientButtonComponent', () => {
   let component: RemoveIngredientButtonComponent;
-  let fixture: ComponentFixture<RemoveIngredientButtonComponent>;
+  let spectator: Spectator<RemoveIngredientButtonComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ RemoveIngredientButtonComponent ]
-    })
-    .compileComponents();
+  const createComponent = createComponentFactory({
+    component: RemoveIngredientButtonComponent,
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RemoveIngredientButtonComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    spectator = createComponent();
+    component = spectator.component;
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('emits event on button click', () => {
+    const eventSpy = spyOn(component.remove, 'emit');
+
+    spectator.click(byText('remove'));
+
+    expect(eventSpy).toHaveBeenCalled();
   });
 });

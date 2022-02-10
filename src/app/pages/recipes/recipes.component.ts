@@ -1,5 +1,5 @@
+import { SnackbarService } from './../../services/snackbar.service';
 import { RecipeEventService } from './services/recipe-event.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { catchError, EMPTY, Observable, take } from 'rxjs';
 import { IRecipe, INewRecipe } from './interfaces/recipes.interfaces';
 import { RecipesService } from './services/recipes.service';
@@ -21,8 +21,8 @@ export class RecipesComponent {
 
   constructor(
     private recipesService: RecipesService,
-    private snackBar: MatSnackBar,
     private recipeEventService: RecipeEventService,
+    private snackbarService: SnackbarService,
     private changeDetector: ChangeDetectorRef
   ) {
     this.getRecipes();
@@ -32,6 +32,7 @@ export class RecipesComponent {
 
   private getRecipes(): void {
     this.recipes$ = this.recipesService.getList();
+    this.changeDetector.markForCheck();
   }
 
   private initEditEventHandler(): void {
@@ -40,7 +41,6 @@ export class RecipesComponent {
       .pipe(untilDestroyed(this))
       .subscribe((recipe) => {
         this.editRecipe(recipe);
-        this.changeDetector.markForCheck();
       });
   }
 
@@ -50,7 +50,6 @@ export class RecipesComponent {
       .pipe(untilDestroyed(this))
       .subscribe((id) => {
         this.deleteRecipe(id);
-        this.changeDetector.markForCheck();
       });
   }
 
@@ -60,13 +59,13 @@ export class RecipesComponent {
       .pipe(
         take(1),
         catchError((error: Error) => {
-          this.error(error);
+          this.snackbarService.show(error.message);
           return EMPTY;
         })
       )
       .subscribe(() => {
         this.getRecipes();
-        this.success();
+        this.snackbarService.show('Success');
       });
   }
 
@@ -76,13 +75,13 @@ export class RecipesComponent {
       .pipe(
         take(1),
         catchError((error: Error) => {
-          this.error(error);
+          this.snackbarService.show(error.message);
           return EMPTY;
         })
       )
       .subscribe(() => {
         this.getRecipes();
-        this.success();
+        this.snackbarService.show('Success');
       });
   }
 
@@ -92,25 +91,13 @@ export class RecipesComponent {
       .pipe(
         take(1),
         catchError((error: Error) => {
-          this.error(error);
+          this.snackbarService.show(error.message);
           return EMPTY;
         })
       )
       .subscribe(() => {
         this.getRecipes();
-        this.success();
+        this.snackbarService.show('Success');
       });
-  }
-
-  private success(): void {
-    this.snackBar.open('Success', undefined, {
-      duration: 2000,
-    });
-  }
-
-  private error(error: Error): void {
-    this.snackBar.open(`Error: ${error.message}`, undefined, {
-      duration: 2000,
-    });
   }
 }

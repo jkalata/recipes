@@ -26,6 +26,7 @@ export class RecipeDialogComponent {
   }
 
   add(): void {
+    console.log(this.form.getRawValue());
     this.dialogRef.close(this.form.getRawValue());
   }
 }

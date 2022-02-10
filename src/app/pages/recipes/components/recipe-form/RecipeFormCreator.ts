@@ -1,7 +1,6 @@
 import {
   IRecipe,
   INewRecipe,
-  INewIngredient,
   IIngredient,
 } from './../../interfaces/recipes.interfaces';
 import {
@@ -22,12 +21,11 @@ export class RecipeFormCreator {
     }
   }
 
-  init(): FormGroup<ControlsOf<IRecipe>> {
+  init(): FormGroup<ControlsOf<INewRecipe>> {
     const ingredients: FormArray<IIngredient> = this.getIngredientsArray();
     return this.fb.group({
-      _id: [this.recipe?._id ?? ''],
       description: [this.recipe?.description ?? '', Validators.required],
-      ingredients: this.getIngredientsArray(),
+      ingredients,
       name: [this.recipe?.name ?? '', Validators.required],
       preparationTimeInMinutes: [
         this.recipe?.preparationTimeInMinutes ?? 0,
@@ -59,7 +57,7 @@ export class RecipeFormCreator {
   private getNewIngredients(): FormArray<IIngredient> {
     return this.fb.array([
       this.fb.group({
-        _id: [''],
+        _id: ['0'],
         name: ['', Validators.required],
         quantity: ['', Validators.required],
       }),

@@ -1,6 +1,6 @@
 import { RecipeEventService } from './../../services/recipe-event.service';
 import { take } from 'rxjs';
-import { IRecipe } from './../../interfaces/recipes.interfaces';
+import { IRecipe, INewRecipe } from './../../interfaces/recipes.interfaces';
 import {
   IRecipeDialogData,
   RecipeDialogComponent,
@@ -35,9 +35,12 @@ export class EditRecipeButtonComponent {
       })
       .afterClosed()
       .pipe(take(1))
-      .subscribe((recipe: IRecipe) => {
+      .subscribe((recipe: INewRecipe) => {
         if (recipe) {
-          this.recipeEventService.emitEditEvent(recipe);
+          this.recipeEventService.emitEditEvent({
+            ...recipe,
+            _id: this.recipe._id,
+          });
         }
       });
   }

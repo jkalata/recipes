@@ -22,6 +22,6 @@ export class ConfirmDialogComponent {
   }
 }
 
-interface IConfirmDialogData {
+export interface IConfirmDialogData {
   message: string;
 }

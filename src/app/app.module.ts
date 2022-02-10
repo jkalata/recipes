@@ -1,3 +1,4 @@
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HeaderModule } from './core/header/header.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -16,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     HeaderModule,
     HttpClientModule,
+    MatSnackBarModule,
     ErrorTailorModule.forRoot({
       errors: {
         useValue: {
