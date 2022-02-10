@@ -38,4 +38,6 @@ export class RecipesComponent {
       .pipe(untilDestroyed(this))
       .subscribe(() => this.getRecipes());
   }
+
+  filterRecipes(value: string): void {}
 }

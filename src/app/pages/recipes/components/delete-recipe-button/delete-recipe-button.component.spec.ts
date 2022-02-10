@@ -9,6 +9,7 @@ import {
   createComponentFactory,
   mockProvider,
 } from '@ngneat/spectator';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 describe('DeleteRecipeButtonComponent', () => {
   let component: DeleteRecipeButtonComponent;
@@ -25,7 +26,7 @@ describe('DeleteRecipeButtonComponent', () => {
   const mockRecipe = MOCK_RECIPE_LIST[0];
   const createComponent = createComponentFactory({
     component: DeleteRecipeButtonComponent,
-    imports: [MatDialogModule],
+    imports: [MatDialogModule, MatTooltipModule],
     providers: [
       RecipeEventService,
       mockProvider(MatDialog),

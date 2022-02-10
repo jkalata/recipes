@@ -1,4 +1,7 @@
 <ng-container *ngIf="recipes$">
-  <app-add-recipe-button></app-add-recipe-button>
+  <div>
+    <app-add-recipe-button></app-add-recipe-button>
+    <app-search></app-search>
+  </div>
   <app-recipe-list [recipes$]="recipes$"></app-recipe-list>
 </ng-container>

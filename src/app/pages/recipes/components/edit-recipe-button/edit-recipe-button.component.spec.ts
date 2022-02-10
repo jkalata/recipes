@@ -9,6 +9,7 @@ import {
   createComponentFactory,
   mockProvider,
 } from '@ngneat/spectator';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 describe('EditRecipeButtonComponent', () => {
   let component: EditRecipeButtonComponent;
@@ -25,7 +26,7 @@ describe('EditRecipeButtonComponent', () => {
 
   const createComponent = createComponentFactory({
     component: EditRecipeButtonComponent,
-    imports: [MatDialogModule],
+    imports: [MatDialogModule, MatTooltipModule],
     providers: [
       RecipeEventService,
       mockProvider(MatDialog),

@@ -1,0 +1,11 @@
+<mat-form-field appearance="outline">
+  <mat-label>Search</mat-label>
+  <input
+    data-testid="input"
+    matInput
+    placeholder="Name, description, ingredient..."
+    [(ngModel)]="searchValue"
+    (input)="emitSearchEvent()"
+  />
+  <mat-icon matSuffix>search</mat-icon>
+</mat-form-field>
