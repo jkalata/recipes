@@ -57,8 +57,8 @@ import { RemoveIngredientButtonComponent } from './components/recipe-form/remove
     ErrorTailorModule,
   ],
   providers: [
-    RecipesService,
-    // { provide: RecipesService, useClass: MockRecipesService },
+    // RecipesService,
+    { provide: RecipesService, useClass: MockRecipesService },
     RecipeEventService,
   ],
 })

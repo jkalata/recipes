@@ -1,3 +1,4 @@
+import { RecipesService } from './../../services/recipes.service';
 import { IRecipe } from './../../interfaces/recipes.interfaces';
 import { RecipeEventService } from './../../services/recipe-event.service';
 import { take } from 'rxjs';
@@ -16,7 +17,8 @@ export class DeleteRecipeButtonComponent {
 
   constructor(
     private dialog: MatDialog,
-    private recipeEventService: RecipeEventService
+    private recipeEventService: RecipeEventService,
+    private recipesService: RecipesService
   ) {}
 
   openConfirmDialog() {
@@ -30,8 +32,17 @@ export class DeleteRecipeButtonComponent {
       .pipe(take(1))
       .subscribe((result: boolean) => {
         if (result) {
-          this.recipeEventService.emitDeleteEvent(this.recipe._id);
+          this.deleteRecipe(this.recipe._id);
         }
+      });
+  }
+
+  deleteRecipe(recipeId: string): void {
+    this.recipesService
+      .delete(recipeId)
+      .pipe(take(1))
+      .subscribe(() => {
+        this.recipeEventService.emitRefetchEvent();
       });
   }
 }

@@ -1,12 +1,9 @@
+import { RecipeEventService } from './../../services/recipe-event.service';
+import { RecipesService } from './../../services/recipes.service';
 import { IRecipeDialogData } from '../recipe-dialog/recipe-dialog.component';
 import { RecipeDialogComponent } from '../recipe-dialog/recipe-dialog.component';
 import { INewRecipe, IRecipe } from './../../interfaces/recipes.interfaces';
-import {
-  Component,
-  ChangeDetectionStrategy,
-  Output,
-  EventEmitter,
-} from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { take } from 'rxjs';
 
@@ -17,8 +14,11 @@ import { take } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddRecipeButtonComponent {
-  @Output() addEvent: EventEmitter<INewRecipe> = new EventEmitter();
-  constructor(private dialog: MatDialog) {}
+  constructor(
+    private dialog: MatDialog,
+    private recipesService: RecipesService,
+    private recipeEventService: RecipeEventService
+  ) {}
 
   openAddRecipeDialog(): void {
     const dialogData: IRecipeDialogData = {
@@ -35,8 +35,17 @@ export class AddRecipeButtonComponent {
       .pipe(take(1))
       .subscribe((newRecipe: IRecipe) => {
         if (newRecipe) {
-          this.addEvent.emit(newRecipe);
+          this.addRecipe(newRecipe);
         }
+      });
+  }
+
+  private addRecipe(newRecipe: INewRecipe): void {
+    this.recipesService
+      .create(newRecipe)
+      .pipe(take(1))
+      .subscribe(() => {
+        this.recipeEventService.emitRefetchEvent();
       });
   }
 }

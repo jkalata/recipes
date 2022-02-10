@@ -1,4 +1,9 @@
-import { MOCK_RECIPE_LIST } from './../../mocks/recipes.mocks';
+import { RecipesService } from './../../services/recipes.service';
+import { RecipeEventService } from './../../services/recipe-event.service';
+import {
+  MOCK_RECIPE_LIST,
+  MOCK_RECIPES_SERVICE,
+} from './../../mocks/recipes.mocks';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AddRecipeButtonComponent } from './add-recipe-button.component';
 import {
@@ -14,7 +19,11 @@ describe('AddRecipeButtonComponent', () => {
 
   const createComponent = createComponentFactory({
     component: AddRecipeButtonComponent,
-    providers: [mockProvider(MatDialog)],
+    providers: [
+      mockProvider(MatDialog),
+      RecipeEventService,
+      { provide: RecipesService, useValue: MOCK_RECIPES_SERVICE },
+    ],
   });
 
   beforeEach(() => {
@@ -26,15 +35,16 @@ describe('AddRecipeButtonComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('emits new recipe on dialog close', () => {
+  it('calls add request on dialog close', () => {
     const mockRecipe = MOCK_RECIPE_LIST[0];
-    const eventSpy = spyOn(component.addEvent, 'emit');
     spectator.inject(MatDialog).open.andReturn({
       afterClosed: () => of(mockRecipe),
     });
 
     component.openAddRecipeDialog();
 
-    expect(eventSpy).toHaveBeenCalledWith(mockRecipe);
+    expect(spectator.component['recipesService'].create).toHaveBeenCalledWith(
+      mockRecipe
+    );
   });
 });

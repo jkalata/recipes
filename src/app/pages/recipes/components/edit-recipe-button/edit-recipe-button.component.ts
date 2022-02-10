@@ -1,3 +1,4 @@
+import { RecipesService } from './../../services/recipes.service';
 import { RecipeEventService } from './../../services/recipe-event.service';
 import { take } from 'rxjs';
 import { IRecipe, INewRecipe } from './../../interfaces/recipes.interfaces';
@@ -19,7 +20,8 @@ export class EditRecipeButtonComponent {
 
   constructor(
     private dialog: MatDialog,
-    private recipeEventService: RecipeEventService
+    private recipeEventService: RecipeEventService,
+    private recipesService: RecipesService
   ) {}
 
   openEditRecipeDialog() {
@@ -37,11 +39,20 @@ export class EditRecipeButtonComponent {
       .pipe(take(1))
       .subscribe((recipe: INewRecipe) => {
         if (recipe) {
-          this.recipeEventService.emitEditEvent({
+          this.editRecipe({
             ...recipe,
             _id: this.recipe._id,
           });
         }
+      });
+  }
+
+  editRecipe(recipe: IRecipe): void {
+    this.recipesService
+      .update(recipe)
+      .pipe(take(1))
+      .subscribe(() => {
+        this.recipeEventService.emitRefetchEvent();
       });
   }
 }

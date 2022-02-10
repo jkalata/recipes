@@ -1,5 +1,5 @@
-import { of } from 'rxjs';
-import { MOCK_RECIPE_LIST } from './mocks/recipes.mocks';
+import { of, take } from 'rxjs';
+import { MOCK_RECIPES_SERVICE, MOCK_RECIPE_LIST } from './mocks/recipes.mocks';
 import { RecipeEventService } from './services/recipe-event.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { RecipesService } from './services/recipes.service';
@@ -14,14 +14,6 @@ describe('RecipesComponent', () => {
   let component: RecipesComponent;
   let spectator: Spectator<RecipesComponent>;
 
-  const mockRecipeService = jasmine.createSpyObj<RecipesService>({
-    create: of({}),
-    delete: of({}),
-    get: of(MOCK_RECIPE_LIST[0]),
-    getList: of(MOCK_RECIPE_LIST),
-    update: of({}),
-  });
-  const mockRecipe = MOCK_RECIPE_LIST[0];
   const createComponent = createComponentFactory({
     component: RecipesComponent,
     imports: [MatSnackBarModule],
@@ -29,7 +21,7 @@ describe('RecipesComponent', () => {
       MockComponents(AddRecipeButtonComponent, RecipeListComponent),
     ],
     providers: [
-      { provide: RecipesService, useValue: mockRecipeService },
+      { provide: RecipesService, useValue: MOCK_RECIPES_SERVICE },
       RecipeEventService,
       ChangeDetectorRef,
     ],
@@ -64,23 +56,15 @@ describe('RecipesComponent', () => {
     );
   });
 
-  it('calls add request', () => {
-    component.addRecipe(mockRecipe);
-
-    expect(component['recipesService'].create).toHaveBeenCalledWith(mockRecipe);
-  });
-
-  it('calls edit request', () => {
-    component.editRecipe(mockRecipe);
-
-    expect(component['recipesService'].update).toHaveBeenCalledWith(mockRecipe);
-  });
-
-  it('calls delete request', () => {
-    component.deleteRecipe(mockRecipe._id);
-
-    expect(component['recipesService'].delete).toHaveBeenCalledWith(
-      mockRecipe._id
-    );
+  it('refetches recipes on event', () => {
+    spectator.component['recipeEventService']
+      .getRefetchObservable()
+      .pipe(take(1))
+      .subscribe(() => {
+        expect(
+          spectator.component['recipesService'].getList
+        ).toHaveBeenCalled();
+      });
+    spectator.inject(RecipeEventService).emitRefetchEvent();
   });
 });

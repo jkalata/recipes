@@ -1,5 +1,10 @@
+import { MockRecipesService } from './../../services/mock-recipes.service';
+import { RecipesService } from './../../services/recipes.service';
 import { of } from 'rxjs';
-import { MOCK_RECIPE_LIST } from './../../mocks/recipes.mocks';
+import {
+  MOCK_RECIPE_LIST,
+  MOCK_RECIPES_SERVICE,
+} from './../../mocks/recipes.mocks';
 import { RecipeEventService } from './../../services/recipe-event.service';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DeleteRecipeButtonComponent } from './delete-recipe-button.component';
@@ -17,7 +22,11 @@ describe('DeleteRecipeButtonComponent', () => {
   const createComponent = createComponentFactory({
     component: DeleteRecipeButtonComponent,
     imports: [MatDialogModule],
-    providers: [RecipeEventService, mockProvider(MatDialog)],
+    providers: [
+      RecipeEventService,
+      mockProvider(MatDialog),
+      { provide: RecipesService, useValue: MOCK_RECIPES_SERVICE },
+    ],
   });
 
   beforeEach(() => {
@@ -33,13 +42,14 @@ describe('DeleteRecipeButtonComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('emits recipe id when dialog closes', () => {
-    const eventSpy = spyOn(component['recipeEventService'], 'emitDeleteEvent');
+  it('calls delete request when dialog closes', () => {
     spectator.inject(MatDialog).open.andReturn({
       afterClosed: () => of(true),
     });
     component.openConfirmDialog();
 
-    expect(eventSpy).toHaveBeenCalledWith(mockRecipe._id);
+    expect(spectator.component['recipesService'].delete).toHaveBeenCalledWith(
+      mockRecipe._id
+    );
   });
 });
