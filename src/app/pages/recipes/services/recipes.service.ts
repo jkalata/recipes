@@ -1,3 +1,4 @@
+import { environment } from './../../../../environments/environment';
 import { catchError, Observable, EMPTY, tap } from 'rxjs';
 import {
   IRecipe,
@@ -11,11 +12,10 @@ import { SnackbarService } from 'src/app/services/snackbar.service';
 @Injectable()
 export class RecipesService implements IRecipeService {
   private url: string = `${this.apiUrl}/recipe`;
-  private headers: HttpHeaders = new HttpHeaders();
-  // .set(
-  //   'X-API-KEY',
-  //   environment.apiKey
-  // );
+  private headers: HttpHeaders = new HttpHeaders().set(
+    'X-API-KEY',
+    environment.apiKey
+  );
 
   constructor(
     private http: HttpClient,
