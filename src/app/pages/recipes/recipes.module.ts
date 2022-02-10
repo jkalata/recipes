@@ -26,7 +26,7 @@ import { EditRecipeButtonComponent } from './components/edit-recipe-button/edit-
 import { RecipeEventService } from './services/recipe-event.service';
 import { AddIngredientButtonComponent } from './components/recipe-form/add-ingredient-button/add-ingredient-button.component';
 import { RemoveIngredientButtonComponent } from './components/recipe-form/remove-ingredient-button/remove-ingredient-button.component';
-
+import { CdkAccordionModule } from '@angular/cdk/accordion';
 @NgModule({
   declarations: [
     RecipesComponent,
@@ -55,6 +55,7 @@ import { RemoveIngredientButtonComponent } from './components/recipe-form/remove
     ReactiveFormsModule,
     MatInputModule,
     ErrorTailorModule,
+    CdkAccordionModule,
   ],
   providers: [
     // RecipesService,

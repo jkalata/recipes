@@ -1,3 +1,4 @@
+import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { MOCK_RECIPE_LIST } from './../../mocks/recipes.mocks';
 import { of } from 'rxjs';
 import { RecipeComponent } from './../recipe/recipe.component';
@@ -11,6 +12,7 @@ describe('RecipeListComponent', () => {
 
   const createComponent = createComponentFactory({
     component: RecipeListComponent,
+    imports: [CdkAccordionModule],
     declarations: [MockComponent(RecipeComponent)],
   });
 

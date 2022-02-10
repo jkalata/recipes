@@ -1,10 +1,12 @@
 <div class="container" *ngIf="recipes$ | async as recipes">
   <ng-container *ngIf="recipes.length > 0; else noRecipes">
-    <app-recipe
-      [recipe]="recipe"
-      *ngFor="let recipe of recipes; trackBy: identity"
-    >
-    </app-recipe>
+    <cdk-accordion>
+      <app-recipe
+        [recipe]="recipe"
+        *ngFor="let recipe of recipes; trackBy: identity"
+      >
+      </app-recipe>
+    </cdk-accordion>
   </ng-container>
   <ng-template #noRecipes>
     <h2>No recipes</h2>

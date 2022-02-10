@@ -1,5 +1,5 @@
 import { of, take } from 'rxjs';
-import { MOCK_RECIPES_SERVICE, MOCK_RECIPE_LIST } from './mocks/recipes.mocks';
+import { MOCK_RECIPE_LIST } from './mocks/recipes.mocks';
 import { RecipeEventService } from './services/recipe-event.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { RecipesService } from './services/recipes.service';
@@ -14,6 +14,13 @@ describe('RecipesComponent', () => {
   let component: RecipesComponent;
   let spectator: Spectator<RecipesComponent>;
 
+  const mockRecipeService = jasmine.createSpyObj<RecipesService>({
+    create: of({}),
+    delete: of({}),
+    get: of(MOCK_RECIPE_LIST[0]),
+    getList: of(MOCK_RECIPE_LIST),
+    update: of({}),
+  });
   const createComponent = createComponentFactory({
     component: RecipesComponent,
     imports: [MatSnackBarModule],
@@ -21,7 +28,7 @@ describe('RecipesComponent', () => {
       MockComponents(AddRecipeButtonComponent, RecipeListComponent),
     ],
     providers: [
-      { provide: RecipesService, useValue: MOCK_RECIPES_SERVICE },
+      { provide: RecipesService, useValue: mockRecipeService },
       RecipeEventService,
       ChangeDetectorRef,
     ],

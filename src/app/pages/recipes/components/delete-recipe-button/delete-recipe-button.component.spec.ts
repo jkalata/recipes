@@ -1,10 +1,6 @@
-import { MockRecipesService } from './../../services/mock-recipes.service';
 import { RecipesService } from './../../services/recipes.service';
 import { of } from 'rxjs';
-import {
-  MOCK_RECIPE_LIST,
-  MOCK_RECIPES_SERVICE,
-} from './../../mocks/recipes.mocks';
+import { MOCK_RECIPE_LIST } from './../../mocks/recipes.mocks';
 import { RecipeEventService } from './../../services/recipe-event.service';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DeleteRecipeButtonComponent } from './delete-recipe-button.component';
@@ -18,6 +14,14 @@ describe('DeleteRecipeButtonComponent', () => {
   let component: DeleteRecipeButtonComponent;
   let spectator: Spectator<DeleteRecipeButtonComponent>;
 
+  const mockRecipesService = jasmine.createSpyObj<RecipesService>({
+    create: of({}),
+    delete: of({}),
+    get: of(MOCK_RECIPE_LIST[0]),
+    getList: of(MOCK_RECIPE_LIST),
+    update: of({}),
+  });
+
   const mockRecipe = MOCK_RECIPE_LIST[0];
   const createComponent = createComponentFactory({
     component: DeleteRecipeButtonComponent,
@@ -25,7 +29,7 @@ describe('DeleteRecipeButtonComponent', () => {
     providers: [
       RecipeEventService,
       mockProvider(MatDialog),
-      { provide: RecipesService, useValue: MOCK_RECIPES_SERVICE },
+      { provide: RecipesService, useValue: mockRecipesService },
     ],
   });
 

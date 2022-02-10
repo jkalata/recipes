@@ -41,11 +41,3 @@ export const MOCK_RECIPE_LIST: IRecipe[] = [
     preparationTimeInMinutes: 60,
   },
 ];
-
-export const MOCK_RECIPES_SERVICE = jasmine.createSpyObj<RecipesService>({
-  create: of({}),
-  delete: of({}),
-  get: of(MOCK_RECIPE_LIST[0]),
-  getList: of(MOCK_RECIPE_LIST),
-  update: of({}),
-});

@@ -1,3 +1,4 @@
+import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { IngredientsComponent } from './ingredients/ingredients.component';
 import { EditRecipeButtonComponent } from './../edit-recipe-button/edit-recipe-button.component';
 import { DeleteRecipeButtonComponent } from './../delete-recipe-button/delete-recipe-button.component';
@@ -12,6 +13,7 @@ describe('RecipeComponent', () => {
   const mockRecipe = MOCK_RECIPE_LIST[0];
   const createComponent = createComponentFactory({
     component: RecipeComponent,
+    imports: [CdkAccordionModule],
     declarations: [
       MockComponents(
         DeleteRecipeButtonComponent,
