@@ -1,13 +1,11 @@
 import { RecipeFormCreator } from './RecipeFormCreator';
 import { MOCK_RECIPE_LIST } from './../../mocks/recipes.mocks';
-import { IRecipe } from './../../interfaces/recipes.interfaces';
+import { IRecipe, INewRecipe } from './../../interfaces/recipes.interfaces';
 describe('RecipeFormCreator', () => {
-  const newRecipe: IRecipe = {
-    _id: '',
+  const newRecipe: INewRecipe = {
     description: '',
     ingredients: [
       {
-        _id: '0',
         name: '',
         quantity: '',
       },
@@ -26,7 +24,16 @@ describe('RecipeFormCreator', () => {
 
   it('creates existing recipe form', () => {
     const form = new RecipeFormCreator(existingRecipe).init();
+    const recipeWithoutId: INewRecipe = {
+      description: existingRecipe.description,
+      ingredients: existingRecipe.ingredients.map((ing) => ({
+        name: ing.name,
+        quantity: ing.quantity,
+      })),
+      name: existingRecipe.name,
+      preparationTimeInMinutes: existingRecipe.preparationTimeInMinutes,
+    };
 
-    expect(form.getRawValue()).toEqual(existingRecipe);
+    expect(form.getRawValue()).toEqual(recipeWithoutId);
   });
 });

@@ -5,7 +5,7 @@ export interface IRecipe {
   name: string;
   preparationTimeInMinutes: number;
   description: string;
-  ingredients: IIngredient[];
+  ingredients: INewIngredient[];
 }
 
 export interface IIngredient {
@@ -14,7 +14,11 @@ export interface IIngredient {
   quantity: string;
 }
 
-export type INewRecipe = Omit<IRecipe, '_id'>;
+export type INewRecipe = Omit<IRecipe, '_id'> & {
+  ingredients: INewIngredient[];
+};
+
+export type INewIngredient = Omit<IIngredient, '_id'>;
 
 export interface IRecipeService {
   getList(): Observable<IRecipe[]>;

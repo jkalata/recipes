@@ -21,7 +21,11 @@ describe('EditRecipeButtonComponent', () => {
   });
 
   beforeEach(() => {
-    spectator = createComponent();
+    spectator = createComponent({
+      props: {
+        recipe: mockRecipe,
+      },
+    });
     component = spectator.component;
   });
 
@@ -34,6 +38,7 @@ describe('EditRecipeButtonComponent', () => {
     spectator.inject(MatDialog).open.andReturn({
       afterClosed: () => of(mockRecipe),
     });
+    spectator.detectChanges();
     component.openEditRecipeDialog();
 
     expect(eventSpy).toHaveBeenCalledWith(mockRecipe);

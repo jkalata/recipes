@@ -1,7 +1,7 @@
 import {
   IRecipe,
   INewRecipe,
-  IIngredient,
+  INewIngredient,
 } from './../../interfaces/recipes.interfaces';
 import {
   ControlsOf,
@@ -22,7 +22,7 @@ export class RecipeFormCreator {
   }
 
   init(): FormGroup<ControlsOf<INewRecipe>> {
-    const ingredients: FormArray<IIngredient> = this.getIngredientsArray();
+    const ingredients: FormArray<INewIngredient> = this.getIngredientsArray();
     return this.fb.group({
       description: [this.recipe?.description ?? '', Validators.required],
       ingredients,
@@ -34,7 +34,7 @@ export class RecipeFormCreator {
     });
   }
 
-  private getIngredientsArray(): FormArray<IIngredient> {
+  private getIngredientsArray(): FormArray<INewIngredient> {
     if (this.recipe) {
     }
     return this.recipe
@@ -42,11 +42,10 @@ export class RecipeFormCreator {
       : this.getNewIngredients();
   }
 
-  private getExistingIngredients(recipe: IRecipe): FormArray<IIngredient> {
+  private getExistingIngredients(recipe: IRecipe): FormArray<INewIngredient> {
     return this.fb.array(
       recipe.ingredients.map((ingredient) =>
         this.fb.group({
-          _id: [ingredient._id],
           name: [ingredient.name, Validators.required],
           quantity: [ingredient.quantity, Validators.required],
         })
@@ -54,10 +53,9 @@ export class RecipeFormCreator {
     );
   }
 
-  private getNewIngredients(): FormArray<IIngredient> {
+  private getNewIngredients(): FormArray<INewIngredient> {
     return this.fb.array([
       this.fb.group({
-        _id: ['0'],
         name: ['', Validators.required],
         quantity: ['', Validators.required],
       }),

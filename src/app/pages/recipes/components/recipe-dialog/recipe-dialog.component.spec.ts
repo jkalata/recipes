@@ -52,7 +52,9 @@ describe('RecipeDialogComponent', () => {
     });
 
     it('emits new recipe', () => {
-      spectator.click(byText(component.data.okButtonLabel));
+      spectator.component.add();
+
+      spectator.detectComponentChanges();
 
       expect(spectator.component['dialogRef'].close).toHaveBeenCalledWith(
         component.form.getRawValue()
@@ -91,7 +93,7 @@ describe('RecipeDialogComponent', () => {
     });
 
     it('emits edited recipe', () => {
-      spectator.click(byText(component.data.okButtonLabel));
+      spectator.component.add();
 
       expect(spectator.component['dialogRef'].close).toHaveBeenCalledWith(
         component.form.getRawValue()
