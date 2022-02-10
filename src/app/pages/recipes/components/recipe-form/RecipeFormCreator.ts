@@ -10,6 +10,13 @@ import {
   FormGroup,
 } from '@ngneat/reactive-forms';
 import { Validators } from '@angular/forms';
+import {
+  MAX_DESCRIPTION,
+  MAX_NAME,
+  MIN_DESCRIPTION,
+  MIN_INGREDIENTS,
+  MIN_NAME,
+} from '../../consts/form.consts';
 
 export class RecipeFormCreator {
   private fb = new FormBuilder();
@@ -24,9 +31,23 @@ export class RecipeFormCreator {
   init(): FormGroup<ControlsOf<INewRecipe>> {
     const ingredients: FormArray<INewIngredient> = this.getIngredientsArray();
     return this.fb.group({
-      description: [this.recipe?.description ?? '', Validators.required],
+      description: [
+        this.recipe?.description ?? '',
+        [
+          Validators.required,
+          Validators.minLength(MIN_DESCRIPTION),
+          Validators.maxLength(MAX_DESCRIPTION),
+        ],
+      ],
       ingredients,
-      name: [this.recipe?.name ?? '', Validators.required],
+      name: [
+        this.recipe?.name ?? '',
+        [
+          Validators.required,
+          Validators.minLength(MIN_NAME),
+          Validators.maxLength(MAX_NAME),
+        ],
+      ],
       preparationTimeInMinutes: [
         this.recipe?.preparationTimeInMinutes ?? 0,
         [Validators.required, Validators.min(1)],
@@ -54,11 +75,17 @@ export class RecipeFormCreator {
   }
 
   private getNewIngredients(): FormArray<INewIngredient> {
-    return this.fb.array([
-      this.fb.group({
-        name: ['', Validators.required],
-        quantity: ['', Validators.required],
-      }),
-    ]);
+    let formArray: FormArray<INewIngredient> = this.fb.array([]);
+
+    for (let i = 0; i < MIN_INGREDIENTS; i++) {
+      formArray.push(
+        this.fb.group({
+          name: ['', Validators.required],
+          quantity: ['', Validators.required],
+        })
+      );
+    }
+
+    return formArray;
   }
 }

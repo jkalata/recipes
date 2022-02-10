@@ -1,7 +1,13 @@
-<ng-container *ngIf="recipes$">
-  <div>
-    <app-add-recipe-button></app-add-recipe-button>
+<div class="container">
+  <div class="list">
+    <mat-spinner *ngIf="loading"></mat-spinner>
     <app-search></app-search>
+    <app-add-recipe-button></app-add-recipe-button>
+    <app-recipe-list [recipes]="filteredRecipes"></app-recipe-list>
   </div>
-  <app-recipe-list [recipes$]="recipes$"></app-recipe-list>
-</ng-container>
+  <div class="details">
+    <router-outlet></router-outlet>
+  </div>
+  <!-- <div>
+  </div> -->
+</div>

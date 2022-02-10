@@ -3,9 +3,8 @@
   <input
     data-testid="input"
     matInput
-    placeholder="Name, description, ingredient..."
-    [(ngModel)]="searchValue"
-    (input)="emitSearchEvent()"
+    placeholder="Name, ingredient..."
+    [formControl]="formControl"
   />
   <mat-icon matSuffix>search</mat-icon>
 </mat-form-field>

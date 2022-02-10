@@ -41,6 +41,7 @@
       </mat-form-field>
 
       <app-remove-ingredient-button
+        *ngIf="form.get('ingredients').length > minIngedients"
         (remove)="removeIngredient(i)"
       ></app-remove-ingredient-button>
     </div>

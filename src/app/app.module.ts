@@ -22,8 +22,10 @@ import { HttpClientModule } from '@angular/common/http';
       errors: {
         useValue: {
           required: 'This field is required',
-          minlength: ({ requiredLength, actualLength }) =>
-            `Expect ${requiredLength} but got ${actualLength}`,
+          minlength: ({ requiredLength }) =>
+            `More than ${requiredLength} characters required `,
+          maxlength: ({ requiredLength }) =>
+            `Less than ${requiredLength} characters required `,
         },
       },
     }),

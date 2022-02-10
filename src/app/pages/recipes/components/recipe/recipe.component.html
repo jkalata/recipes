@@ -1,34 +1,7 @@
-<cdk-accordion-item
-  #accordionItem="cdkAccordionItem"
-  role="button"
-  tabindex="0"
-  [attr.aria-expanded]="accordionItem.expanded"
->
-  <mat-card (click)="accordionItem.toggle()">
-    <mat-card-header>
-      <mat-card-title>{{ recipe.name }}</mat-card-title>
-      <mat-card-subtitle>
-        <div>
-          {{ recipe.description }}
-        </div>
-        <div class="preparation-time">
-          <mat-icon>access_time</mat-icon>
-          {{ preparationTime }}
-        </div>
-      </mat-card-subtitle>
-      <div>
-        <app-delete-recipe-button [recipe]="recipe"></app-delete-recipe-button>
-        <app-edit-recipe-button [recipe]="recipe"></app-edit-recipe-button>
-      </div>
-    </mat-card-header>
-    <div
-      class="example-accordion-item-body"
-      role="region"
-      [style.display]="accordionItem.expanded ? '' : 'none'"
-    >
-      <mat-card-content>
-        <app-ingredients [ingredients]="recipe.ingredients"></app-ingredients>
-      </mat-card-content>
-    </div>
-  </mat-card>
-</cdk-accordion-item>
+<mat-card-header>
+  <mat-card-title>{{ recipe.name }}</mat-card-title>
+  <div>
+    <app-delete-recipe-button [recipe]="recipe"></app-delete-recipe-button>
+    <app-edit-recipe-button [recipe]="recipe"></app-edit-recipe-button>
+  </div>
+</mat-card-header>

@@ -38,9 +38,7 @@ describe('RecipeFormComponent', () => {
     expect(spectator.query(AddIngredientButtonComponent)).toBeTruthy();
   });
 
-  it('renders remove ingredient button', () => {
-    expect(spectator.query(RemoveIngredientButtonComponent)).toBeTruthy();
-  });
+
 
   it('adds ingredient on button click', () => {
     const beforeIngredientLength = component.form

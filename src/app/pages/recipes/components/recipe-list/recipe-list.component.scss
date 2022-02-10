@@ -2,7 +2,11 @@
   padding: 1em;
 }
 
-app-recipe:not(:first-child) {
+mat-card:not(:first-child) {
   display: block;
   margin-top: 1em;
+}
+
+mat-card {
+  cursor: pointer;
 }

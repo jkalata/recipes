@@ -1,3 +1,5 @@
+import { RouterTestingModule } from '@angular/router/testing';
+import { IRecipe } from './../../interfaces/recipes.interfaces';
 import { RecipesService } from './../../services/recipes.service';
 import { of } from 'rxjs';
 import { MOCK_RECIPE_LIST } from './../../mocks/recipes.mocks';
@@ -15,18 +17,18 @@ describe('DeleteRecipeButtonComponent', () => {
   let component: DeleteRecipeButtonComponent;
   let spectator: Spectator<DeleteRecipeButtonComponent>;
 
+  const mockRecipe = MOCK_RECIPE_LIST[0] as IRecipe;
   const mockRecipesService = jasmine.createSpyObj<RecipesService>({
     create: of({}),
     delete: of({}),
-    get: of(MOCK_RECIPE_LIST[0]),
+    get: of(mockRecipe),
     getList: of(MOCK_RECIPE_LIST),
     update: of({}),
   });
 
-  const mockRecipe = MOCK_RECIPE_LIST[0];
   const createComponent = createComponentFactory({
     component: DeleteRecipeButtonComponent,
-    imports: [MatDialogModule, MatTooltipModule],
+    imports: [MatDialogModule, MatTooltipModule, RouterTestingModule],
     providers: [
       RecipeEventService,
       mockProvider(MatDialog),

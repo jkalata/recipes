@@ -1,5 +1,3 @@
-import { of } from 'rxjs';
-import { RecipesService } from './../services/recipes.service';
 import { IRecipe, IIngredient } from './../interfaces/recipes.interfaces';
 
 const MOCK_INGREDIENTLIST: IIngredient[] = [
@@ -38,6 +36,6 @@ export const MOCK_RECIPE_LIST: IRecipe[] = [
     description: 'Description id 2',
     ingredients: MOCK_INGREDIENTLIST.slice(2, 4),
     name: 'Recipe name 2',
-    preparationTimeInMinutes: 60,
+    preparationTimeInMinutes: 61,
   },
 ];

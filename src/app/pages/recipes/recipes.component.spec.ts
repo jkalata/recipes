@@ -1,3 +1,5 @@
+import { IRecipe } from './interfaces/recipes.interfaces';
+import { SearchEventService } from './services/search-event.service';
 import { SearchComponent } from './components/search/search.component';
 import { of, take } from 'rxjs';
 import { MOCK_RECIPE_LIST } from './mocks/recipes.mocks';
@@ -18,7 +20,7 @@ describe('RecipesComponent', () => {
   const mockRecipeService = jasmine.createSpyObj<RecipesService>({
     create: of({}),
     delete: of({}),
-    get: of(MOCK_RECIPE_LIST[0]),
+    get: of(MOCK_RECIPE_LIST[0] as IRecipe),
     getList: of(MOCK_RECIPE_LIST),
     update: of({}),
   });
@@ -36,6 +38,7 @@ describe('RecipesComponent', () => {
       { provide: RecipesService, useValue: mockRecipeService },
       RecipeEventService,
       ChangeDetectorRef,
+      SearchEventService,
     ],
   });
 
@@ -46,12 +49,6 @@ describe('RecipesComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('gets recipe list', () => {
-    expect(component.recipes$).toEqual(
-      spectator.inject(RecipesService).getList()
-    );
   });
 
   it('renders add recipe button', () => {
@@ -67,8 +64,8 @@ describe('RecipesComponent', () => {
   });
 
   it('passes recipes to recipe list', () => {
-    expect(spectator.query(RecipeListComponent)?.recipes$).toEqual(
-      component.recipes$
+    expect(spectator.query(RecipeListComponent)?.recipes).toEqual(
+      component.recipes
     );
   });
 

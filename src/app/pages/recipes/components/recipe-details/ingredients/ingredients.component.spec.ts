@@ -1,4 +1,5 @@
-import { MOCK_RECIPE_LIST } from './../../../mocks/recipes.mocks';
+import { IRecipe } from '../../../interfaces/recipes.interfaces';
+import { MOCK_RECIPE_LIST } from '../../../mocks/recipes.mocks';
 import { IngredientsComponent } from './ingredients.component';
 import { Spectator, createComponentFactory, byTestId } from '@ngneat/spectator';
 
@@ -6,7 +7,7 @@ describe('IngredientsComponent', () => {
   let component: IngredientsComponent;
   let spectator: Spectator<IngredientsComponent>;
 
-  const mockRecipe = MOCK_RECIPE_LIST[0];
+  const mockRecipe = MOCK_RECIPE_LIST[0] as IRecipe;
   const createComponent = createComponentFactory({
     component: IngredientsComponent,
   });

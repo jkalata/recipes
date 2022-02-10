@@ -1,10 +1,5 @@
 import { AddIngredientButtonComponent } from './add-ingredient-button.component';
-import {
-  Spectator,
-  createComponentFactory,
-  byRole,
-  byText,
-} from '@ngneat/spectator';
+import { Spectator, createComponentFactory, byText } from '@ngneat/spectator';
 
 describe('AddIngredientButtonComponent', () => {
   let component: AddIngredientButtonComponent;

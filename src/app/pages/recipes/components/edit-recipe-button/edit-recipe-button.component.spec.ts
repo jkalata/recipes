@@ -1,3 +1,4 @@
+import { IRecipe } from './../../interfaces/recipes.interfaces';
 import { RecipesService } from './../../services/recipes.service';
 import { MOCK_RECIPE_LIST } from './../../mocks/recipes.mocks';
 import { of } from 'rxjs';
@@ -14,12 +15,12 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 describe('EditRecipeButtonComponent', () => {
   let component: EditRecipeButtonComponent;
   let spectator: Spectator<EditRecipeButtonComponent>;
-  const mockRecipe = MOCK_RECIPE_LIST[0];
+  const mockRecipe = MOCK_RECIPE_LIST[0] as IRecipe;
 
   const mockRecipesService = jasmine.createSpyObj<RecipesService>({
     create: of({}),
     delete: of({}),
-    get: of(MOCK_RECIPE_LIST[0]),
+    get: of(mockRecipe),
     getList: of(MOCK_RECIPE_LIST),
     update: of({}),
   });
