@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiURL: 'https://crudcrud.com/api/03865c3dde1149e99ce63677b5c56c87',
+  apiURL: 'https://crudcrud.com/api/63c30d9a2e8345d38f45f5844728f9e5',
+  apiKey: 'HoA',
 };
 
 /*

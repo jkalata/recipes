@@ -1,12 +1,11 @@
-<div class="container" *ngIf="filteredRecipes$ | async as recipes">
+<div class="container">
   <ng-container *ngIf="recipes.length > 0; else noRecipes">
-    <cdk-accordion>
-      <app-recipe
-        [recipe]="recipe"
-        *ngFor="let recipe of recipes; trackBy: identity"
-      >
-      </app-recipe>
-    </cdk-accordion>
+    <mat-card
+      *ngFor="let recipe of recipes; trackBy: identity"
+      [routerLink]="['details', recipe._id]"
+    >
+      <app-recipe [recipe]="recipe"> </app-recipe>
+    </mat-card>
   </ng-container>
   <ng-template #noRecipes>
     <h2>No recipes</h2>

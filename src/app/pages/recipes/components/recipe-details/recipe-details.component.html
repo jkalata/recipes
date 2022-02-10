@@ -1,0 +1,17 @@
+<ng-container *ngIf="recipe$ | async as recipe">
+  <mat-card>
+    <app-recipe [recipe]="recipe"></app-recipe>
+
+    <mat-card-content>
+      <div class="preparation-time">
+        <mat-icon>access_time</mat-icon>
+        {{ recipe.preparationTimeInMinutes | preparationTime }}
+      </div>
+      <app-ingredients [ingredients]="recipe.ingredients"></app-ingredients>
+      <div>
+        <h2>Description:</h2>
+        {{ recipe.description }}
+      </div>
+    </mat-card-content>
+  </mat-card>
+</ng-container>

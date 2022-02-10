@@ -5,6 +5,7 @@ import {
 import { FormGroup, ControlsOf, FormBuilder } from '@ngneat/reactive-forms';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ControlContainer, Validators } from '@angular/forms';
+import { MIN_INGREDIENTS } from '../../consts/form.consts';
 
 @Component({
   selector: 'app-recipe-form',
@@ -14,6 +15,8 @@ import { ControlContainer, Validators } from '@angular/forms';
 })
 export class RecipeFormComponent implements OnInit {
   form!: FormGroup<ControlsOf<INewRecipe>>;
+
+  minIngedients = MIN_INGREDIENTS;
 
   constructor(
     private controlContainer: ControlContainer,

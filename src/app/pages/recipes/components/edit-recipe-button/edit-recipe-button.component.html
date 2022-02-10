@@ -1,3 +1,7 @@
-<mat-icon matTooltip="Edit" color="primary" (click)="openEditRecipeDialog()"
+<mat-icon
+  matTooltip="Edit"
+  color="primary"
+  (click)="$event.stopPropagation()"
+  [routerLink]="['/recipes/edit', recipe._id]"
   >edit</mat-icon
 >

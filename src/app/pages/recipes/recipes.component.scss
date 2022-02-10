@@ -1,9 +1,33 @@
-app-add-recipe-button {
-  display: block;
-  padding: 1em;
+.container {
+  display: flex;
+
+  div {
+    margin: 1em;
+  }
 }
 
-div {
-  display: flex;
-  justify-content: space-between;
+.list {
+  flex: 33;
+  border: solid 1px black;
+  border-radius: 1em;
+  height: 100vh;
+  position: relative;
+}
+
+.details {
+  flex: 66;
+  width: 100%;
+  position: relative;
+}
+app-add-recipe-button {
+  display: block;
+  margin-left: 1em;
+}
+
+mat-spinner {
+  position: absolute;
+  left: 50%;
+  top: 25%;
+  transform: translateX(-50%);
+  z-index: 10;
 }

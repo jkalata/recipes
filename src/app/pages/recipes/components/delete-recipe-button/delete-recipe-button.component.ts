@@ -5,6 +5,7 @@ import { take } from 'rxjs';
 import { ConfirmDialogComponent } from '../../../../shared/confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-delete-recipe-button',
@@ -18,7 +19,8 @@ export class DeleteRecipeButtonComponent {
   constructor(
     private dialog: MatDialog,
     private recipeEventService: RecipeEventService,
-    private recipesService: RecipesService
+    private recipesService: RecipesService,
+    private router: Router
   ) {}
 
   openConfirmDialog() {
@@ -43,6 +45,7 @@ export class DeleteRecipeButtonComponent {
       .pipe(take(1))
       .subscribe(() => {
         this.recipeEventService.emitRefetchEvent();
+        this.router.navigate(['recipes']);
       });
   }
 }

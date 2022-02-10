@@ -9,12 +9,16 @@ describe('RecipeFormCreator', () => {
         name: '',
         quantity: '',
       },
+      {
+        name: '',
+        quantity: '',
+      },
     ],
     name: '',
     preparationTimeInMinutes: 0,
   };
 
-  const existingRecipe = MOCK_RECIPE_LIST[0];
+  const existingRecipe = MOCK_RECIPE_LIST[0] as IRecipe;
 
   it('creates new recipe form', () => {
     const form = new RecipeFormCreator().init();

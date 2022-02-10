@@ -1,7 +1,6 @@
-import { SearchEventService } from './../../services/search-event.service';
+import { IRecipe } from './../../interfaces/recipes.interfaces';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { MOCK_RECIPE_LIST } from './../../mocks/recipes.mocks';
-import { of } from 'rxjs';
 import { RecipeComponent } from './../recipe/recipe.component';
 import { RecipeListComponent } from './recipe-list.component';
 import { Spectator, createComponentFactory, byText } from '@ngneat/spectator';
@@ -15,16 +14,11 @@ describe('RecipeListComponent', () => {
     component: RecipeListComponent,
     imports: [CdkAccordionModule],
     declarations: [MockComponent(RecipeComponent)],
-    providers: [SearchEventService],
   });
 
   describe('no recipes', () => {
     beforeEach(() => {
-      spectator = createComponent({
-        props: {
-          recipes$: of([]),
-        },
-      });
+      spectator = createComponent();
       component = spectator.component;
     });
 
@@ -42,7 +36,7 @@ describe('RecipeListComponent', () => {
     beforeEach(() => {
       spectator = createComponent({
         props: {
-          recipes$: of(MOCK_RECIPE_LIST),
+          recipes: MOCK_RECIPE_LIST,
         },
       });
       component = spectator.component;
@@ -59,8 +53,8 @@ describe('RecipeListComponent', () => {
     });
 
     it('passes input to recipe component', () => {
-      expect(spectator.queryAll(RecipeComponent)[0].recipe).toEqual(
-        MOCK_RECIPE_LIST[0]
+      expect(spectator.queryAll(RecipeComponent)[0]?.recipe).toEqual(
+        MOCK_RECIPE_LIST[0] as IRecipe
       );
     });
   });

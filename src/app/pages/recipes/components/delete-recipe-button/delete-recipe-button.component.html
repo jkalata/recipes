@@ -1,3 +1,6 @@
-<mat-icon matTooltip="Delete" color="warn" (click)="openConfirmDialog()"
+<mat-icon
+  matTooltip="Delete"
+  color="warn"
+  (click)="openConfirmDialog(); $event.stopPropagation()"
   >delete</mat-icon
 >

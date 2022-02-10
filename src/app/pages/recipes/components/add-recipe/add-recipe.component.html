@@ -1,0 +1,11 @@
+<mat-spinner *ngIf="loading"> </mat-spinner>
+<h2>Add recipe</h2>
+<app-recipe-form [formGroup]="form"></app-recipe-form>
+<button
+  mat-raised-button
+  color="accent"
+  (click)="addTherapy()"
+  [disabled]="form.invalid"
+>
+  Save
+</button>
